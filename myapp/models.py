@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here
 
@@ -13,6 +14,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length = 100)
     descripcion = models.TextField(max_length = 100)
     precio = models.IntegerField()
+    precio_usd = models.FloatField(null=True, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete = models.CASCADE, related_name = 'productos')
 
     def __str__(self):
@@ -24,4 +26,3 @@ class Stock(models.Model):
 
     def __str__(self):
         return f'Stock de {self.cod_prod.nombre}: {self.cantidad} unidades'
-    

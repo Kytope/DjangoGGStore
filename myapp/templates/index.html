@@ -14,8 +14,13 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 
-    <p class="login-text ">Inicia sesión para una experiencia totalmente personalizada</p>
-    <a href="{% url 'login' %}"  class="login-button login-overlay">Iniciar Sesión</a>
+{% if user.is_authenticated %}
+<p class="login-text ">¡Bienvenido a GG Store!</p>
+<a href="{% url 'productos' %}"  class="login-button login-overlay">Productos</a>
+{% else %}
+<p class="login-text ">Inicia sesión para una experiencia totalmente personalizada</p>
+<a href="{% url 'login' %}"  class="login-button login-overlay">Iniciar Sesión</a>
+{% endif %}
     <section class="hero">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">

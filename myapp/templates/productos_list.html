@@ -15,6 +15,12 @@
 <body>
     <div class="container">
         <h1>Lista de Productos</h1>
+        {% if mensaje %}
+            <div class="alert success">
+                {{ mensaje }}
+            </div>
+        {% endif %}
+        <a href="{% url 'ver_carrito' %}" class="ver-carrito">Ver Carrito</a>
         <div class="productos-grid">
             {% for producto in productos %}
                 <div class="producto-card">
@@ -23,11 +29,15 @@
                     <p><strong>Precio:</strong> {{ producto.precio }}$</p>
                     <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
                     <p><strong>Stock:</strong> {{ producto.stock.cantidad }}</p>
+                    <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
+                        {% csrf_token %}
+                        {{ form.cantidad }}
+                        <button type="submit" class="btn btn-agregar">Agregar al Carrito</button>
+                    </form>
                 </div>
             {% endfor %}
         </div>
     </div>
-</body>
 </html>
 
 {% endblock %}

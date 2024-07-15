@@ -18,3 +18,7 @@ class ProductoForm(forms.ModelForm):
                 except Stock.DoesNotExist:
                     initial['cantidad'] = 0
         super().__init__(*args, **kwargs)
+
+class AgregarAlCarritoForm(forms.Form):
+    cantidad = forms.IntegerField(min_value=1, max_value=100, initial=1)
+    actualizar = forms.BooleanField(required=False, initial=False, widget=forms.HiddenInput)        
